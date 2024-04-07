@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API карт 2ГИС</title>
+
+        <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .border{
+            border-radius: 0 0 1em 1em;
+            background: transparent;
+        }
+        .switch{
+            margin-left: 91%;
+        }
+        .switch:hover{
+            transition: 0.5s;
+            margin-left: 89%;
+        }
+        .svg{
+            fill: #ffff;
+        }
+        </style>
+    </head>
+    <body>
+        </div>
+        <div id="bar" style=" width: 6vw; height: 96.8vh; background-color: #373388; position: fixed; display:block; z-index: 2; border-radius: 0 10px 10px 0; margin-top: 0.2vh;">
+            <div style="position: absolute; height: 67vh; width: 5vw; background-color: white; margin-left: 0.4vw; border-radius: 10px; margin-top: 1vh; z-index: 3">
+                <img class="svg" src="home.svg" style="position: absolute; height: 3vh; width: 3vw; margin-top: 3vh; margin-left: 1vw;">
+                <img class="svg" src="user.svg" style="position: absolute; height: 3vh; width: 3vw; margin-top: 11vh; margin-left: 1vw;">
+                <img class="svg" src="bookmark.svg" style="position: absolute; height: 3vh; width: 3vw; margin-top: 19vh; margin-left: 1vw;">
+                <img class="svg" src="marker.svg" style="position: absolute; height: 3vh; width: 3vw; margin-top: 27vh; margin-left: 1vw;">
+                <img class="svg" src="envelope.svg" style="position: absolute; height: 3vh; width: 3vw; margin-top: 35vh; margin-left: 1vw;">
+                <img class="svg" src="search.svg" style="position: absolute; height: 3vh; width: 3vw; margin-top: 43vh; margin-left: 1vw;">
+            </div>
+                <img class="svg" src="settings.svg" style="position: absolute; height: 3vh; width: 3vw; margin-top: 90vh; margin-left: 1vw;">
+
+
+            <img src="angle-right.svg" style="width: 3vw; height: 3vh; margin-left: 4.7vw; margin-top: 43.5vh; position: absolute; opacity: 1; transition: 1.05s" id="arrow">
+            <input type="button" name="byn" style="width: 2vw; height: 10vh; margin-top: 40vh; margin-left: 5.1vw; border-radius: 10px; z-index: 3; transition: 1.05s;" onclick="Poping()" id="byn">
+            <div id="popup" style="width: 0em; height: 66vh; background-color: white; display: none; margin-top: -51vh; padding-top: 20em; transition: 1s; border-radius: 10px">
+                <div id="popik" style="position: absolute; width: 0em; height: 23vh; background-color: #58a494; display: none; transition: 1.05s; border-radius: 10px; margin-top: -30vh; margin-left: 6vw"></div>
+                <div id="popq" style="position: absolute; width: 0em; height: 10vh; background-color: #373388; display: none; transition: 1.05s; border-radius: 10px; margin-top: -5vh; margin-left: 6vw"></div>
+
+                <div id="poper" style="position: absolute; width: 0em; height: 15vh; background-color: #d5dde6; display: none; transition: 1.05s; border-radius: 10px; margin-top: 20vh; margin-left: 6vw"></div>
+                <div id="popi" style="position: absolute; width: 0em; height: 15vh; background-color: #d5dde6; display: none; transition: 1.05s; border-radius: 10px; margin-top: 20vh; margin-left: 20vw"></div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="switch" style="width: 8em; height: 2em; background-color: white; position: absolute; z-index: 2; margin-top: 17%; color: black; border-radius: 5px;">Test: mode switch</div>
+        <div class="switch" style="width: 8em; height: 2em; background-color: #58a494; position: absolute; z-index: 2; margin-top: 20%; color: white; border-radius: 5px;">Test: mode switch</div>
+        <div class="switch" style="width: 8em; height: 2em; background-color: #373388; position: absolute; z-index: 2; margin-top: 23%; color: white; border-radius: 5px;">Test: mode switch</div>
+
+        <div id="map" style="width:90vw; height:97vh; display:block; z-index: 1; margin-left: 9.2vw; margin-top: 1.5vh; border-radius:10px"></div>
+
+
+        <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+        <script type="text/javascript">
+            let popup = document.getElementById('popup');
+            let popik = document.getElementById('popik');
+            let popq = document.getElementById('popq');
+            let poper = document.getElementById('poper');
+            let popi = document.getElementById('popi');
+            var map;
+
+            DG.then(function () {
+                map = DG.map('map', {
+                    center: [62.025, 129.73],
+                    zoom: 13
+                });
+
+                DG.marker([62.025, 129.73]).addTo(map).bindPopup('Вы кликнули по мне!');
+            });
+
+            function Poping(){
+                if (popup.style.display == "none"){
+                    popup.style.display = "block";
+                    popik.style.display = "block";
+                    popq.style.display = "block";
+                    poper.style.display = "block";
+                    popi.style.display = "block";
+                    setTimeout(() => {
+                        popup.style.width = '35em';
+                        popik.style.width = '25em';
+                        popq.style.width = '25em';
+                        poper.style.width = '11em';
+                        popi.style.width = '11em';
+                            document.getElementById('byn').style.marginLeft = '40em';
+                            document.getElementById('arrow').style.marginLeft = '32.8em';
+                    }, 40);
+                }else{
+                    popup.style.width = '0em';
+                    document.getElementById('byn').style.marginLeft = '5.1vw';
+                    document.getElementById('arrow').style.marginLeft = '4.7vw';
+                    setTimeout(() => {
+                        popup.style.opacity = "0";
+                        popik.style.opacity = "0";
+                        popq.style.opacity = "0";
+                        poper.style.opacity = "0";
+                        popi.style.opacity = "0";
+                    }, 50);
+                    setTimeout(() => {
+                        popup.style.display = "none";
+                        popik.style.display = "none";
+                        popq.style.display = "none";
+                        poper.style.display = "none";
+                        popi.style.display = "none";
+                    }, 1000)
+                }
+            }
+        </script>
+    </body>
+</html>
